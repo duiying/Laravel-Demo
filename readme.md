@@ -4,6 +4,23 @@
 基于 Laravel5.8 的练手项目
 </p>
 
+### 部署
+```shell
+# 安装
+composer install
+# 配置数据库
+cp .env.example .env
+# 生成数据表结构
+php artisan migrate
+# 填充数据
+php artisan db:seed
+# 启动本地开发服务器
+php artisan serve
+```
+
+### 访问
+http://127.0.0.1:8000/
+
 ### 文档
 - [Laravel5.8的安装](docs/Laravel5.8的安装.md)
 - [生成用户系统](docs/生成用户系统.md)
