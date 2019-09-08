@@ -18,6 +18,41 @@ php artisan db:seed
 php artisan serve
 ```
 
+### Nginx
+```
+server {
+
+    listen 80;
+
+    server_name laravel.com;
+    root /data/www/Laravel-Demo/public;
+    index index.php index.html index.htm;
+
+    location / {
+        # Redirect everything that isn't a real file to index.php
+        try_files $uri $uri/ /index.php$is_args$args;
+    }
+
+    # deny accessing php files for the /assets directory
+    location ~ ^/assets/.*\.php$ {
+        deny all;
+    }
+
+    location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_pass 127.0.0.1:9000;
+        try_files $uri =404;
+    }
+
+    location ~* /\. {
+        deny all;
+    }
+
+}
+```
+
+
 ### 访问
 http://127.0.0.1:8000/
 
